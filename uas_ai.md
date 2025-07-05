@@ -108,10 +108,6 @@ Berikut adalah ringkasan statistik untuk fitur numerik:
    - Kondisi rumah berkisar dari 1 (buruk) sampai 5 (baik), dengan mayoritas di level 3–4.
    - Fitur view menunjukkan sebagian besar rumah tidak memiliki pemandangan khusus (nilai 0).
 
-Berikut Heatmap Korelasi antar Fitur:
-![image](https://github.com/user-attachments/assets/a91bbddc-f685-4bca-b4e1-60e32aa540ae)
-
-
 # Data Preparation
 Tahapan data preparation dilakukan untuk mempersiapkan dataset sebelum digunakan dalam pelatihan model machine learning. Berikut adalah langkah-langkah yang telah dilakukan:
 # 1. Konversi Variabel Kategori
@@ -137,6 +133,9 @@ Data dibagi menggunakan train_test_split dengan rasio:
 - Data numerik telah dinormalisasi.
 - Dataset telah dibagi menjadi data latih dan uji secara proporsional.
 - Dataset kini siap untuk proses modeling regresi.
+
+Berikut Heatmap Korelasi antar Fitur:
+![image](https://github.com/user-attachments/assets/a91bbddc-f685-4bca-b4e1-60e32aa540ae)
 
 # Modeling
 Beberapa algoritma machine learning telah digunakan untuk memprediksi harga rumah, antara lain:
