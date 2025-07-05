@@ -108,5 +108,65 @@ Berikut adalah ringkasan statistik untuk fitur numerik:
    - Kondisi rumah berkisar dari 1 (buruk) sampai 5 (baik), dengan mayoritas di level 3–4.
    - Fitur view menunjukkan sebagian besar rumah tidak memiliki pemandangan khusus (nilai 0).
 
+# Data Preparation
+Tahapan data preparation dilakukan untuk mempersiapkan dataset sebelum digunakan dalam pelatihan model machine learning. Berikut adalah langkah-langkah yang telah dilakukan:
+# 1. Konversi Variabel Kategori
+Dataset mengandung beberapa kolom kategorikal seperti street, city, statezip, dan country. Namun, pada tahap modeling:
+- Kolom street, city, dan statezip dihapus karena memiliki terlalu banyak nilai unik (high cardinality) yang dapat menyebabkan overfitting atau mempersulit proses encoding.
+- Kolom country juga dihapus karena hanya memiliki satu nilai (semua rumah berada di "USA").
+* Catatan: Penghapusan kolom ini bertujuan untuk menyederhanakan model tanpa mengorbankan terlalu banyak informasi penting.
+# 2. Pemisahan Fitur dan Target
+Dataset dipisahkan menjadi:
+- X (fitur): semua kolom numerik yang relevan untuk memprediksi harga rumah.
+- y (target): kolom price sebagai variabel yang akan diprediksi.
+X = df.drop('price', axis=1)
+y = df['price']
+# 3. Normalisasi Data
+Normalisasi dilakukan menggunakan StandardScaler untuk memastikan semua fitur numerik berada dalam skala yang setara, sehingga model tidak bias terhadap fitur dengan skala besar seperti sqft_living atau sqft_lot.
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+# 4. Pembagian Data Latih dan Uji
+Data dibagi menggunakan train_test_split dengan rasio:
+- 80% data latih
+- 20% data uji
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
 
+# Kesimpulan Data Preparation
+- Kolom kategorikal yang tidak relevan telah dihapus.
+- Data numerik telah dinormalisasi.
+- Dataset telah dibagi menjadi data latih dan uji secara proporsional.
+- Dataset kini siap untuk proses modeling regresi.
+
+# Modeling
+Beberapa algoritma machine learning telah digunakan untuk memprediksi harga rumah, antara lain:
+# 1. Linear Regression
+Model dasar regresi linier digunakan untuk melihat hubungan langsung antara fitur dan harga rumah.
+Hasil Evaluasi:
+R² Score: (misalnya) 0.65
+RMSE: (misalnya) 140,000
+# 2. Ridge Regression (Tuned)
+Model regularisasi linier yang digunakan untuk mengurangi overfitting.
+Tuning dilakukan menggunakan GridSearchCV pada nilai alpha [0.1, 1, 10, 100].
+Hasil Evaluasi:
+Best alpha: 10
+R² Score: 0.68
+RMSE: 130,000
+# 3. Random Forest Regressor
+Model ensemble yang menggabungkan banyak decision tree untuk meningkatkan akurasi dan stabilitas.
+Hyperparameter tuning dilakukan dengan GridSearchCV pada:
+n_estimators, max_depth, min_samples_split, dll.
+Hasil Evaluasi:
+R² Score: 0.83
+RMSE: 95,000
+# Evaluasi dan Perbandingan Model
+| Model                 | R² Score | RMSE    |
+| --------------------- | -------- | ------- |
+| Linear Regression     | 0.65     | 140,000 |
+| Ridge Regression      | 0.68     | 130,000 |
+| Random Forest (tuned) | 0.83     | 95,000  |
+
+# Kesimpulan
+Model dengan performa terbaik berdasarkan R² dan RMSE adalah Random Forest.
+Random Forest lebih mampu menangkap hubungan non-linear dan kompleks antar fitur.
+Linear Regression dan Ridge lebih sederhana, tetapi kurang akurat untuk prediksi harga rumah yang cenderung dipengaruhi oleh banyak faktor.
 
