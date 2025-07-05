@@ -49,3 +49,63 @@ Model akan dievaluasi menggunakan metrik seperti R-Squared (R²), Root Mean Squa
 
 Solusi ini diharapkan dapat memberikan estimasi harga rumah yang lebih objektif, transparan, dan data-driven, serta membantu berbagai pihak dalam proses jual-beli atau penilaian aset properti.
 
+#Data Understanding
+# Deskripsi Dataset
+Dataset yang digunakan dalam proyek ini berasal dari kaggle: https://www.kaggle.com/datasets/fratzcan/usa-house-prices. Dataset ini merupakan kumpulan data perumahan yang berisi informasi mengenai karakteristik fisik dan lingkungan rumah, yang digunakan untuk memprediksi harga rumah (price). Dataset ini terdiri dari 4.140 data dan 18 kolom fitur, yang mencakup informasi seperti jumlah kamar tidur, luas bangunan, tahun dibangun, dan kondisi properti.
+
+# Informasi Dataset
+Berdasarkan hasil df.info() dan struktur data, berikut adalah penjelasan masing-masing kolom:
+| Kolom          | Tipe Data | Jumlah Data | Deskripsi                                                              |
+| -------------- | --------- | ----------- | ---------------------------------------------------------------------- |
+| price          | float64   | 4.140       | Harga jual rumah (target yang akan diprediksi)                         |
+| bedrooms       | int64     | 4.140       | Jumlah kamar tidur                                                     |
+| bathrooms      | float64   | 4.140       | Jumlah kamar mandi                                                     |
+| sqft\_living   | float64   | 4.140       | Luas area tinggal (dalam sqft)                                         |
+| sqft\_lot      | float64   | 4.140       | Luas keseluruhan tanah                                                 |
+| floors         | float64   | 4.140       | Jumlah lantai rumah                                                    |
+| waterfront     | int64     | 4.140       | Apakah rumah menghadap air (0 = Tidak, 1 = Ya)                         |
+| view           | int64     | 4.140       | Nilai tampilan pemandangan rumah (skor 0–4)                            |
+| condition      | int64     | 4.140       | Kondisi rumah (skor 1–5)                                               |
+| sqft\_above    | float64   | 4.140       | Luas bangunan di atas tanah (tidak termasuk basement)                  |
+| sqft\_basement | float64   | 4.140       | Luas basement jika ada (dalam sqft)                                    |
+| yr\_built      | int64     | 4.140       | Tahun rumah dibangun                                                   |
+| yr\_renovated  | int64     | 4.140       | Tahun terakhir renovasi (0 jika belum pernah direnovasi)               |
+| street         | object    | 4.140       | Alamat jalan rumah                                                     |
+| city           | object    | 4.140       | Kota tempat rumah berada                                               |
+| statezip       | object    | 4.140       | Kode pos lokasi rumah (format kode pos + nama negara bagian)           |
+| country        | object    | 4.140       | Negara rumah tersebut berada                                           |
+| sqft\_living15 | float64   | 4.140       | Luas area tempat tinggal dari 15 rumah terdekat (indikator lingkungan) |
+Dataset tidak memiliki nilai yang hilang (missing values), sehingga dapat langsung digunakan dalam tahap analisis eksploratif (EDA), pembersihan data, dan pemodelan machine learning.
+# Statistik Deskriptif
+Berikut adalah ringkasan statistik untuk fitur numerik:
+| Fitur          | Count | Mean    | Std Dev | Min  | 25%     | 50%     | 75%     | Max        |
+| -------------- | ----- | ------- | ------- | ---- | ------- | ------- | ------- | ---------- |
+| price          | 4140  | 553,026 | 583,866 | 0    | 320,000 | 460,000 | 691,250 | 26,590,000 |
+| bedrooms       | 4140  | 3.40    | 0.90    | 0    | 3       | 4       | 4       | 8          |
+| bathrooms      | 4140  | 2.16    | 0.78    | 0    | 1.75    | 2.25    | 2.50    | 6.75       |
+| sqft\_living   | 4140  | 2,143.6 | 957.4   | 370  | 1,470   | 1,980   | 2,620   | 10,040     |
+| sqft\_lot      | 4140  | 14,697  | 35,878  | 638  | 5,000   | 7,676   | 11,000  | 1,074,218  |
+| floors         | 4140  | 1.51    | 0.53    | 1    | 1       | 1.5     | 2       | 3.5        |
+| waterfront     | 4140  | 0.0075  | 0.086   | 0    | 0       | 0       | 0       | 1          |
+| view           | 4140  | 0.25    | 0.79    | 0    | 0       | 0       | 0       | 4          |
+| condition      | 4140  | 3.45    | 0.68    | 1    | 3       | 3       | 4       | 5          |
+| sqft\_above    | 4140  | 1,831   | 861.4   | 370  | 1,190   | 1,600   | 2,310   | 8,020      |
+| sqft\_basement | 4140  | 312.3   | 464.3   | 0    | 0       | 0       | 602.5   | 4,820      |
+| yr\_built      | 4140  | 1970.8  | 29.8    | 1900 | 1951    | 1976    | 1997    | 2014       |
+| yr\_renovated  | 4140  | 808.4   | 979.4   | 0    | 0       | 0       | 0       | 2014       |
+# Exploratory Data Analysis (EDA)
+1. Distribusi Harga Rumah (price)
+   - Sebagian besar rumah memiliki harga antara 300.000 hingga 700.000.
+   - Terdapat beberapa outlier ekstrem hingga 26 juta.
+2. Kamar Tidur & Mandi (bedrooms, bathrooms)
+   - Rumah paling umum memiliki 3–4 kamar tidur dan 2–2.5 kamar mandi.
+   - Terdapat rumah dengan 0 kamar tidur atau kamar mandi, yang kemungkinan adalah outlier atau error input.
+3. Ukuran Bangunan (sqft_living, sqft_lot, sqft_basement)
+   - Rata-rata luas bangunan adalah 2.143 sqft.
+   - Lot size dan basement memiliki distribusi dengan banyak outlier besar.
+4. Kondisi dan View
+   - Kondisi rumah berkisar dari 1 (buruk) sampai 5 (baik), dengan mayoritas di level 3–4.
+   - Fitur view menunjukkan sebagian besar rumah tidak memiliki pemandangan khusus (nilai 0).
+
+
+
