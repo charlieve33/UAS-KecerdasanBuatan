@@ -108,6 +108,10 @@ Berikut adalah ringkasan statistik untuk fitur numerik:
    - Kondisi rumah berkisar dari 1 (buruk) sampai 5 (baik), dengan mayoritas di level 3–4.
    - Fitur view menunjukkan sebagian besar rumah tidak memiliki pemandangan khusus (nilai 0).
 
+Berikut Heatmap Korelasi antar Fitur:
+![image](https://github.com/user-attachments/assets/a91bbddc-f685-4bca-b4e1-60e32aa540ae)
+
+
 # Data Preparation
 Tahapan data preparation dilakukan untuk mempersiapkan dataset sebelum digunakan dalam pelatihan model machine learning. Berikut adalah langkah-langkah yang telah dilakukan:
 # 1. Konversi Variabel Kategori
@@ -120,19 +124,13 @@ Dataset dipisahkan menjadi:
 - X (fitur): semua kolom numerik yang relevan untuk memprediksi harga rumah.
 - y (target): kolom price sebagai variabel yang akan diprediksi.
 
-X = df.drop('price', axis=1)
-y = df['price']
 # 3. Normalisasi Data
 Normalisasi dilakukan menggunakan StandardScaler untuk memastikan semua fitur numerik berada dalam skala yang setara, sehingga model tidak bias terhadap fitur dengan skala besar seperti sqft_living atau sqft_lot.
 
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
 # 4. Pembagian Data Latih dan Uji
 Data dibagi menggunakan train_test_split dengan rasio:
 - 80% data latih
 - 20% data uji
-
-X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
 
 # Kesimpulan Data Preparation
 - Kolom kategorikal yang tidak relevan telah dihapus.
@@ -168,9 +166,9 @@ Hasil Evaluasi:
 | Ridge Regression      | 0.68     | 130,000 |
 | Random Forest (tuned) | 0.83     | 95,000  |
 # Analisis Prediksi
-visualisasi scatter plot dari hasil prediksi model regresi terhadap harga rumah, dibandingkan dengan nilai aslinya. Berikut adalah hasilnya:
+visualisasi scatter plot dari hasil prediksi model regresi terhadap harga rumah, dibandingkan dengan nilai aslinya. Berikut adalah hasil prediksinya:
 
-![image](https://github.com/user-attachments/assets/9bd1fa2c-4d3b-498d-92f3-4693547919a0)
+![image](https://github.com/user-attachments/assets/9e6272cd-6e13-4d33-9b10-b862920235d4)
 
 
 # Kesimpulan
