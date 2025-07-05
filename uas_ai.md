@@ -75,6 +75,7 @@ Berdasarkan hasil df.info() dan struktur data, berikut adalah penjelasan masing-
 | statezip       | object    | 4.140       | Kode pos lokasi rumah (format kode pos + nama negara bagian)           |
 | country        | object    | 4.140       | Negara rumah tersebut berada                                           |
 | sqft\_living15 | float64   | 4.140       | Luas area tempat tinggal dari 15 rumah terdekat (indikator lingkungan) |
+
 Dataset tidak memiliki nilai yang hilang (missing values), sehingga dapat langsung digunakan dalam tahap analisis eksploratif (EDA), pembersihan data, dan pemodelan machine learning.
 # Statistik Deskriptif
 Berikut adalah ringkasan statistik untuk fitur numerik:
