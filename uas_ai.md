@@ -119,16 +119,19 @@ Dataset mengandung beberapa kolom kategorikal seperti street, city, statezip, da
 Dataset dipisahkan menjadi:
 - X (fitur): semua kolom numerik yang relevan untuk memprediksi harga rumah.
 - y (target): kolom price sebagai variabel yang akan diprediksi.
+
 X = df.drop('price', axis=1)
 y = df['price']
 # 3. Normalisasi Data
 Normalisasi dilakukan menggunakan StandardScaler untuk memastikan semua fitur numerik berada dalam skala yang setara, sehingga model tidak bias terhadap fitur dengan skala besar seperti sqft_living atau sqft_lot.
+
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 # 4. Pembagian Data Latih dan Uji
 Data dibagi menggunakan train_test_split dengan rasio:
 - 80% data latih
 - 20% data uji
+
 X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
 
 # Kesimpulan Data Preparation
@@ -142,22 +145,22 @@ Beberapa algoritma machine learning telah digunakan untuk memprediksi harga ruma
 # 1. Linear Regression
 Model dasar regresi linier digunakan untuk melihat hubungan langsung antara fitur dan harga rumah.
 Hasil Evaluasi:
-R² Score: (misalnya) 0.65
-RMSE: (misalnya) 140,000
+- R² Score: (misalnya) 0.65
+- RMSE: (misalnya) 140,000
 # 2. Ridge Regression (Tuned)
 Model regularisasi linier yang digunakan untuk mengurangi overfitting.
 Tuning dilakukan menggunakan GridSearchCV pada nilai alpha [0.1, 1, 10, 100].
 Hasil Evaluasi:
-Best alpha: 10
-R² Score: 0.68
-RMSE: 130,000
+- Best alpha: 10
+- R² Score: 0.68
+- RMSE: 130,000
 # 3. Random Forest Regressor
 Model ensemble yang menggabungkan banyak decision tree untuk meningkatkan akurasi dan stabilitas.
 Hyperparameter tuning dilakukan dengan GridSearchCV pada:
 n_estimators, max_depth, min_samples_split, dll.
 Hasil Evaluasi:
-R² Score: 0.83
-RMSE: 95,000
+- R² Score: 0.83
+- RMSE: 95,000
 # Evaluasi dan Perbandingan Model
 | Model                 | R² Score | RMSE    |
 | --------------------- | -------- | ------- |
