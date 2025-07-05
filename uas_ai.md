@@ -49,7 +49,7 @@ Model akan dievaluasi menggunakan metrik seperti R-Squared (R²), Root Mean Squa
 
 Solusi ini diharapkan dapat memberikan estimasi harga rumah yang lebih objektif, transparan, dan data-driven, serta membantu berbagai pihak dalam proses jual-beli atau penilaian aset properti.
 
-#Data Understanding
+# Data Understanding
 # Deskripsi Dataset
 Dataset yang digunakan dalam proyek ini berasal dari kaggle: https://www.kaggle.com/datasets/fratzcan/usa-house-prices. Dataset ini merupakan kumpulan data perumahan yang berisi informasi mengenai karakteristik fisik dan lingkungan rumah, yang digunakan untuk memprediksi harga rumah (price). Dataset ini terdiri dari 4.140 data dan 18 kolom fitur, yang mencakup informasi seperti jumlah kamar tidur, luas bangunan, tahun dibangun, dan kondisi properti.
 
