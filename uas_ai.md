@@ -167,6 +167,11 @@ Hasil Evaluasi:
 | Linear Regression     | 0.65     | 140,000 |
 | Ridge Regression      | 0.68     | 130,000 |
 | Random Forest (tuned) | 0.83     | 95,000  |
+# Analisis Prediksi
+visualisasi scatter plot dari hasil prediksi model regresi terhadap harga rumah, dibandingkan dengan nilai aslinya. Berikut adalah hasilnya:
+
+![image](https://github.com/user-attachments/assets/9bd1fa2c-4d3b-498d-92f3-4693547919a0)
+
 
 # Kesimpulan
 Model dengan performa terbaik berdasarkan R² dan RMSE adalah Random Forest.
